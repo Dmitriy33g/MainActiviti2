@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_color">
+        <item
+            android:id="@+id/menu_black"
+            android:title="Черный" />
+        <item
+            android:id="@+id/menu_yellow"
+            android:title="Желтый" />
+    </group>
+</menu>
