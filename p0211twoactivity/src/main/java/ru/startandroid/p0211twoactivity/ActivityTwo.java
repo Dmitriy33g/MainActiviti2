@@ -2,13 +2,14 @@ package ru.startandroid.p0211twoactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class ActivityTwo extends AppCompatActivity implements View.OnClickListener {
+public class ActivityTwo extends Activity implements View.OnClickListener {
 
     Button btnActMain;
 
