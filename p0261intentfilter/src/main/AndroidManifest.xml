@@ -17,6 +17,7 @@
             <intent-filter>
                 <action android:name="ru.startandroid.intent.action.showtime" />
                 <action android:name="ru.startandroid.intent.action.showdate" />
+                <action android:name="ru.startandroid.intent.action.info" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

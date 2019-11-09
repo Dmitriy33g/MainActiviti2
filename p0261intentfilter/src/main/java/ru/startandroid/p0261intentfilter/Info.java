@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 
 public class Info extends AppCompatActivity {
 
+    TextView tvDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,8 @@ public class Info extends AppCompatActivity {
 
         String format = "", textInfo = "";
 
+        tvDate = findViewById(R.id.tvInfo);
+
         // в зависимости от action заполняем переменные
         if (action.equals("ru.startandroid.intent.action.showtime")) {
             format = "HH:mm:ss";
@@ -32,13 +36,19 @@ public class Info extends AppCompatActivity {
             format = "dd.MM.yyyy";
             textInfo = "Date: ";
         }
+        else if (action.equals("ru.startandroid.intent.action.info")) {
+            String fName = intent.getStringExtra("fname");
+            String lName = intent.getStringExtra("lname");
+
+            tvDate.setText("Your name is:\n" + fName + " " + lName);
+            return;
+        }
 
         // в зависимости от содержимого переменной format
         // получаем дату или время в переменную datetime
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         String datetime = sdf.format(new Date(System.currentTimeMillis()));
 
-        TextView tvDate = findViewById(R.id.tvInfo);
         tvDate.setText(textInfo + datetime);
     }
 }
