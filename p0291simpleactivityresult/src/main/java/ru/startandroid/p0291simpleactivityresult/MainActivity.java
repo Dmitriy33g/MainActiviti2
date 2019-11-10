@@ -3,15 +3,24 @@ package ru.startandroid.p0291simpleactivityresult;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvName;
     Button btnName;
+    Button btnColor;
+    Button btnAlign;
+
+    final int REQUEST_CODE_NAME = 0;
+    final int REQUEST_CODE_COLOR = 1;
+    final int REQUEST_CODE_ALIGN = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,20 +29,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvName = findViewById(R.id.tvName);
         btnName = findViewById(R.id.btnName);
+        btnColor = findViewById(R.id.btnColor);
+        btnAlign = findViewById(R.id.btnAlign);
+
         btnName.setOnClickListener(this);
+        btnColor.setOnClickListener(this);
+        btnAlign.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, NameActivity.class);
-        startActivity(intent);
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.btnName:
+                intent = new Intent(this, NameActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_NAME);
+                break;
+            case R.id.btnColor:
+                intent = new Intent(this, ColorActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_COLOR);
+                break;
+            case R.id.btnAlign:
+                intent = new Intent(this, AlignActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_ALIGN);
+                break;
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data == null) {return;}
-        String name = data.getStringExtra("name");
-        tvName.setText("Your name is " + name);
+        if (data == null) {
+            return;}
+        else if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_NAME:
+                    String name = data.getStringExtra("name");
+                    tvName.setText("Your name is:\n" + name);
+                case REQUEST_CODE_COLOR:
+                    int color = data.getIntExtra("color", tvName.getTextColors().getDefaultColor());
+                    tvName.setTextColor(color);
+                case REQUEST_CODE_ALIGN:
+                    int align = data.getIntExtra("alignment", tvName.getGravity());
+                    tvName.setGravity(align);
+                    break;
+            }
+        }
+        else {
+            Toast.makeText(this, "Нет результата", Toast.LENGTH_SHORT).show();
+        }
     }
 }
