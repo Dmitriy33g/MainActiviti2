@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnName;
     Button btnColor;
     Button btnAlign;
+    Button btnWeb;
+    Button btnMap;
+    Button btnCall;
 
     final int REQUEST_CODE_NAME = 0;
     final int REQUEST_CODE_COLOR = 1;
@@ -31,10 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnName = findViewById(R.id.btnName);
         btnColor = findViewById(R.id.btnColor);
         btnAlign = findViewById(R.id.btnAlign);
+        btnWeb = findViewById(R.id.btnWeb);
+        btnMap = findViewById(R.id.btnMap);
+        btnCall = findViewById(R.id.btnCall);
 
         btnName.setOnClickListener(this);
         btnColor.setOnClickListener(this);
         btnAlign.setOnClickListener(this);
+        btnWeb.setOnClickListener(this);
+        btnMap.setOnClickListener(this);
+        btnCall.setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +62,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnAlign:
                 intent = new Intent(this, AlignActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ALIGN);
+                break;
+            case R.id.btnWeb:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com"));
+                startActivity(intent);
+                break;
+            case R.id.btnMap:
+                intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:55.754283,37.62002"));
+                startActivity(intent);
+                break;
+            case R.id.btnCall:
+                intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:12345"));
+                startActivity(intent);
                 break;
         }
     }

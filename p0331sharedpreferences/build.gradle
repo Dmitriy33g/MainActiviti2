@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "ru.startandroid.p0091onclickbuttons"
+        applicationId "ru.startandroid.p0331sharedpreferences"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1

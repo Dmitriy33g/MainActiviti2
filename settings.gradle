@@ -1,2 +1,2 @@
-include ':app', ':p0091onclickbuttons', ':p0102activitylistener', ':menusimple', ':p0161dynamiclayout', ':p0181dynamiclayout3', ':p0191simplecalculator', ':p0201simpleanimation', ':p0211twoactivity', ':p0261intentfilter', ':p0291simpleactivityresult'
+include ':app', ':p0091onclickbuttons', ':p0102activitylistener', ':menusimple', ':p0161dynamiclayout', ':p0181dynamiclayout3', ':p0191simplecalculator', ':p0201simpleanimation', ':p0211twoactivity', ':p0261intentfilter', ':p0291simpleactivityresult', ':p0321simplebrowser', ':p0331sharedpreferences'
 rootProject.name='MainActiviti'
