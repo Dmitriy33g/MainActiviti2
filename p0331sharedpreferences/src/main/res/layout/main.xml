@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="29dp"
+            android:layout_marginRight="37dp"
             android:text="ID" />
 
         <EditText
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="12dp"
             android:text="Name" />
 
         <EditText
@@ -124,16 +124,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="8dp"
-            android:text="Email" />
+            android:layout_marginRight="5dp"
+            android:text="People" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etPeople"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_background_normal"
-            android:inputType="textEmailAddress" />
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Region" />
+
+        <EditText
+            android:id="@+id/etRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/editbox_background_normal"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
@@ -169,129 +192,11 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Справочник стран"
-        android:textSize="14sp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
-    </TextView>
 
     <Button
-        android:id="@+id/btnAll"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:text="Все записи" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/btnSQL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnFunc"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Функция" />
-        <EditText
-            android:id="@+id/etFunc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:drawable/editbox_background_normal">
-            <requestFocus>
-            </requestFocus>
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Население" />
-        <EditText
-            android:id="@+id/etPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background_normal">
-        </EditText>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:text="Население по региону" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnHaving"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Население по региону >" />
-
-        <EditText
-            android:id="@+id/etRegionPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:drawable/editbox_background_normal"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnSort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Сортировка">
-        </Button>
-        <RadioGroup
-            android:id="@+id/rgSort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/rName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Наименование">
-            </RadioButton>
-            <RadioButton
-                android:id="@+id/rPeople"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Население">
-            </RadioButton>
-            <RadioButton
-                android:id="@+id/rRegion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Регион">
-            </RadioButton>
-        </RadioGroup>
-    </LinearLayout>
+        android:text="Query" />
 
 </LinearLayout>
