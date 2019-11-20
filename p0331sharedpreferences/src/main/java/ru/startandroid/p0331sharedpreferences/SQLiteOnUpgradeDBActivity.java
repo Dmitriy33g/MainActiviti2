@@ -16,7 +16,7 @@ public class SQLiteOnUpgradeDBActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
 
     final String DB_NAME = "staff"; // имя БД
-    final int DB_VERSION = 1; // версия БД
+    final int DB_VERSION = 2; // версия БД
 
     class DBHelper extends SQLiteOpenHelper {
 
@@ -30,23 +30,56 @@ public class SQLiteOnUpgradeDBActivity extends AppCompatActivity {
 
             String[] people_name = { "Иван", "Марья", "Петр", "Антон", "Даша",
                     "Борис", "Костя", "Игорь" };
+            int[] people_posid = { 2, 3, 2, 2, 3, 1, 2, 4 };
+
+            // данные для таблицы должностей
             String[] people_positions = { "Программер", "Бухгалтер",
                     "Программер", "Программер", "Бухгалтер", "Директор",
                     "Программер", "Охранник" };
+            int[] position_id = { 1, 2, 3, 4 };
+            String[] position_name = { "Директор", "Программер", "Бухгалтер",
+                    "Охранник" };
+            int[] position_salary = { 15000, 13000, 10000, 8000 };
 
             ContentValues cv = new ContentValues();
+            String sql;
+
+            if (db.getVersion() == 2) {
+                sql = "create table people ("
+                        + "id integer primary key autoincrement,"
+                        + "name text,"
+                        + "posid integer);";
+                // создаем таблицу должностей
+                db.execSQL("create table position ("
+                        + "id integer primary key,"
+                        + "name text, salary integer);");
+
+                // заполняем ее
+                for (int i = 0; i < position_id.length; i++) {
+                    cv.clear();
+                    cv.put("id", position_id[i]);
+                    cv.put("name", position_name[i]);
+                    cv.put("salary", position_salary[i]);
+                    db.insert("position", null, cv);
+                }
+            } else {
+                sql = "create table people ("
+                        + "id integer primary key autoincrement,"
+                        + "name text,"
+                        + "position text);";
+            }
 
             // создаем таблицу людей
-            db.execSQL("create table people ("
-                    + "id integer primary key autoincrement,"
-                    + "name text,"
-                    + "position text);");
+            db.execSQL(sql);
 
             // заполняем ее
             for (int i = 0; i < people_name.length; i++) {
                 cv.clear();
                 cv.put("name", people_name[i]);
-                cv.put("position", people_positions[i]);
+                if (db.getVersion() == 2) {
+                    cv.put("posid", people_posid[i]);
+                } else
+                    cv.put("position", people_positions[i]);
                 db.insert("people", null, cv);
             }
         }
@@ -84,6 +117,28 @@ public class SQLiteOnUpgradeDBActivity extends AppCompatActivity {
 
                     db.execSQL("alter table people add column posid integer;");
 
+                    for (int i = 0; i < position_id.length; i++) {
+                        cv.clear();
+                        cv.put("posid", position_id[i]);
+                        db.update("people", cv, "position = ?",
+                                new String[]{position_name[i]});
+                    }
+
+                    db.execSQL("create temporary table people_tmp (" +
+                            "id integer, name text, position text, posid integer);");
+
+                    db.execSQL("insert into people_tmp select id, name, position, posid from people;");
+                    db.execSQL("drop table people");
+
+                    db.execSQL("create table people (" +
+                            "id integer primary key autoincrement," +
+                            "name text," +
+                            "posid integer);");
+
+                    db.execSQL("insert into people select id, name, posid from people_tmp;");
+                    db.execSQL("drop table people_tmp;");
+
+                    db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
                 }
@@ -109,17 +164,20 @@ public class SQLiteOnUpgradeDBActivity extends AppCompatActivity {
         logCursor(c, "Table people");
         c.close();
 
-        c = db.rawQuery("select * from position", null);
-        logCursor(c, "Table position");
-        c.close();
+        if (db.getVersion() == 2) {
+            c = db.rawQuery("select * from position", null);
+            logCursor(c, "Table position");
+            c.close();
 
-        String sqlQuery = "select PL.name as Name, PS.name as Position, salary as Salary "
-                + "from people as PL "
-                + "inner join position as PS "
-                + "on PL.posid = PS.id ";
-        c = db.rawQuery(sqlQuery, null);
-        logCursor(c, "inner join");
-        c.close();
+            String sqlQuery = "select PL.name as Name, PS.name as Position, salary as Salary "
+                    + "from people as PL "
+                    + "inner join position as PS "
+                    + "on PL.posid = PS.id ";
+            c = db.rawQuery(sqlQuery, null);
+            logCursor(c, "inner join");
+            c.close();
+        }
+
     }
 
     // вывод в лог данных из курсора
