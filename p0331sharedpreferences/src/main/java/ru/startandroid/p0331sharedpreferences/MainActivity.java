@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     static final String LOG_TAG = "myLogs";
 
-    Button btnAdd, btnRead, btnClear, btnUpd, btnDel, btnSQL;
+    Button btnAdd, btnRead, btnClear, btnUpd, btnDel, btnSQL, btnTransaction, btnOnUpgradeBDSQLite;
 
     EditText etName, etPeople, etRegion, etID;
 
@@ -72,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     + "id integer primary key autoincrement,"
                     + "name text,"
                     + "posid integer" + ");");
+
+            // создаем таблицу тестовую
+            Log.d(LOG_TAG, "--- Create table test ---");
+            db.execSQL("create table test ("
+                    + "id integer primary key autoincrement,"
+                    + "name text);");
 
             // создаем объект для данных
             ContentValues cv = new ContentValues();
@@ -132,6 +138,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnSQL = findViewById(R.id.btnSQL);
         btnSQL.setOnClickListener(this);
+
+        btnTransaction = findViewById(R.id.btnTransaction);
+        btnTransaction.setOnClickListener(this);
+
+        btnOnUpgradeBDSQLite = findViewById(R.id.btnOnUpgradeBDSQLite);
+        btnOnUpgradeBDSQLite.setOnClickListener(this);
 
         etName = findViewById(R.id.etName);
         etPeople = findViewById(R.id.etPeople);
@@ -214,6 +226,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String region = etRegion.getText().toString();
         String id = etID.getText().toString();
 
+        Intent intent;
+
         switch (v.getId()) {
             case R.id.btnSave:
                 saveText();
@@ -289,7 +303,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(LOG_TAG, "deleted rows count = " + delCount);
                 break;
             case  R.id.btnSQL:
-                Intent intent = new Intent(this, SQLiteQueryActivity.class);
+                intent = new Intent(this, SQLiteQueryActivity.class);
+                startActivity(intent);
+                break;
+            case  R.id.btnTransaction:
+                intent = new Intent(this, SQLiteTransactionActivity.class);
+                startActivity(intent);
+                break;
+            case  R.id.btnOnUpgradeBDSQLite:
+                intent = new Intent(this, SQLiteOnUpgradeDBActivity.class);
                 startActivity(intent);
                 break;
         }

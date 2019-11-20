@@ -26,10 +26,31 @@ public class SQLiteTransactionActivity extends AppCompatActivity {
     }
 
     void myActions() {
-        db = dbh.getWritableDatabase();
-        delete(db, "mytable");
-        insert(db, "mytable", "val1");
-        read(db, "mytable");
+        try {
+            db = dbh.getWritableDatabase();
+            delete(db, "mytable");
+
+            db.beginTransaction();
+            insert(db, "mytable", "val1");
+
+            Log.d(LOG_TAG, "create DBHelper");
+            MainActivity.DBHelper dbh2 = new MainActivity.DBHelper(this);
+            Log.d(LOG_TAG, "get db");
+            SQLiteDatabase db2 = dbh2.getWritableDatabase();
+            read(db2, "mytable");
+            dbh2.close();
+
+            db.setTransactionSuccessful();
+            db.endTransaction();
+
+            read(db, "mytable");
+            dbh.close();
+        } catch (Exception ex) {
+            Log.d(LOG_TAG, ex.getClass() + " error: " + ex.getMessage());
+        } finally {
+            db.endTransaction();
+            Log.d(LOG_TAG, "endTransaction db");
+        }
     }
 
     void insert(SQLiteDatabase db, String table, String value) {
