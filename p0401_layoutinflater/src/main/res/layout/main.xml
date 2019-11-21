@@ -33,4 +33,28 @@
             android:text="Relative Layout: " />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btnList"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Layout Inflater List" />
+
+    <Button
+        android:id="@+id/btnSimpleList"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Simple List" />
+
+    <Button
+        android:id="@+id/btnSimpleListChoice"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Simple List Choice" />
+
+    <Button
+        android:id="@+id/btnSimpleListEvents"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Simple List Events" />
+
 </LinearLayout>
