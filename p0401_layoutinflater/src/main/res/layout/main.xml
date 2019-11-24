@@ -57,4 +57,10 @@
         android:layout_height="40dp"
         android:text="Simple List Events" />
 
+    <Button
+        android:id="@+id/btnExpandableList"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Expandable List" />
+
 </LinearLayout>

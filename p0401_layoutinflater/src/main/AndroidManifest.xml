@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ExpandableListActivity"
+            android:label="ExpandableList" />
+        <activity
             android:name=".SimpleListEventsActivity"
-            android:label="SimpleListEvents"></activity>
+            android:label="SimpleListEvents" />
         <activity
             android:name=".SimpleListChoiceActivity"
             android:label="SimpleListChoice" />

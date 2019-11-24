@@ -16,7 +16,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     final String LOG_TAG = "myLogs";
-    Button btnList, btnSimpleList, btnSimpleListChoice, btnSimpleListEvents;
+    Button btnList, btnSimpleList, btnSimpleListChoice, btnSimpleListEvents,
+            btnExpandableList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnSimpleListEvents = findViewById(R.id.btnSimpleListEvents);
         btnSimpleListEvents.setOnClickListener(this);
+
+        btnExpandableList = findViewById(R.id.btnExpandableList);
+        btnExpandableList.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnSimpleListEvents:
                 intent = new Intent(this, SimpleListEventsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnExpandableList:
+                intent = new Intent(this, ExpandableListActivity.class);
                 startActivity(intent);
                 break;
         }
