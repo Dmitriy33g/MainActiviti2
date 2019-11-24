@@ -50,15 +50,15 @@ public class ExpandableListActivity extends AppCompatActivity {
         }
 
         // список атрибутов групп для чтения
-        String groupFrom[] = new String[] {"groupName"};
+        String[] groupFrom = new String[]{"groupName"};
         // список ID view-элементов, в которые будет помещены атрибуты групп
-        int groupTo[] = new int[] {android.R.id.text1};
+        int[] groupTo = new int[]{android.R.id.text1};
 
         // создаем коллекцию для коллекций элементов
         childData = new ArrayList<>();
 
         // создаем коллекцию элементов для первой группы
-        childDataItem = new ArrayList<Map<String, String>>();
+        childDataItem = new ArrayList<>();
         // заполняем список атрибутов для каждого элемента
         for (String phone : phonesHTC) {
             m = new HashMap<>();
@@ -87,9 +87,9 @@ public class ExpandableListActivity extends AppCompatActivity {
         childData.add(childDataItem);
 
         // список атрибутов элементов для чтения
-        String childFrom[] = new String[] {"phoneName"};
+        String[] childFrom = new String[]{"phoneName"};
         // список ID view-элементов, в которые будет помещены атрибуты элементов
-        int childTo[] = new int[] {android.R.id.text1};
+        int[] childTo = new int[]{android.R.id.text1};
 
         SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(this,
                 groupData, android.R.layout.simple_expandable_list_item_1, groupFrom, groupTo,
