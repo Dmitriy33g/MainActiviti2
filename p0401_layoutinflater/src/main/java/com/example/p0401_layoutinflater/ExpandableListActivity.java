@@ -41,10 +41,10 @@ public class ExpandableListActivity extends AppCompatActivity {
         setContentView(R.layout.expandablelist);
 
         // заполняем коллекцию групп из массива с названиями групп
-        groupData = new ArrayList<Map<String, String>>();
+        groupData = new ArrayList<>();
         for (String group : groups) {
             // заполняем список атрибутов для каждой группы
-            m = new HashMap<String, String>();
+            m = new HashMap<>();
             m.put("groupName", group); // имя компании
             groupData.add(m);
         }
@@ -55,13 +55,13 @@ public class ExpandableListActivity extends AppCompatActivity {
         int groupTo[] = new int[] {android.R.id.text1};
 
         // создаем коллекцию для коллекций элементов
-        childData = new ArrayList<ArrayList<Map<String, String>>>();
+        childData = new ArrayList<>();
 
         // создаем коллекцию элементов для первой группы
         childDataItem = new ArrayList<Map<String, String>>();
         // заполняем список атрибутов для каждого элемента
         for (String phone : phonesHTC) {
-            m = new HashMap<String, String>();
+            m = new HashMap<>();
             m.put("phoneName", phone); // название телефона
             childDataItem.add(m);
         }
@@ -69,18 +69,18 @@ public class ExpandableListActivity extends AppCompatActivity {
         childData.add(childDataItem);
 
         // создаем коллекцию элементов для второй группы
-        childDataItem = new ArrayList<Map<String, String>>();
+        childDataItem = new ArrayList<>();
         for (String phone : phonesSams) {
-            m = new HashMap<String, String>();
+            m = new HashMap<>();
             m.put("phoneName", phone);
             childDataItem.add(m);
         }
         childData.add(childDataItem);
 
         // создаем коллекцию элементов для третьей группы
-        childDataItem = new ArrayList<Map<String, String>>();
+        childDataItem = new ArrayList<>();
         for (String phone : phonesLG) {
-            m = new HashMap<String, String>();
+            m = new HashMap<>();
             m.put("phoneName", phone);
             childDataItem.add(m);
         }
